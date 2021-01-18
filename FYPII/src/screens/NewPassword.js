@@ -35,12 +35,17 @@ function NewPassword(props) {
         <TextInput
           placeholder=" New Password"
           placeholderTextColor="rgba(155,155,155,1)"
-          style={styles.placeholder1}
+          style={styles.placeholder2}
         ></TextInput>
         <TextInput
           placeholder=" Re Enter Password"
           placeholderTextColor="rgba(155,155,155,1)"
-          style={styles.placeholder2}
+          style={styles.placeholder3}
+        ></TextInput>
+        <TextInput
+          placeholder=" Old Password"
+          placeholderTextColor="rgba(155,155,155,1)"
+          style={styles.placeholder1}
         ></TextInput>
       </View>
     </View>
@@ -75,7 +80,7 @@ const styles = StyleSheet.create({
     height: 47,
     width: 143,
     borderRadius: 20,
-    marginTop: 424,
+    marginTop: 500,
     marginLeft: 109
   },
   text: {
@@ -101,6 +106,19 @@ const styles = StyleSheet.create({
   },
   placeholder2: {
     top: 358,
+    left: 44,
+    position: "absolute",
+    fontFamily: "roboto-regular",
+    color: "#121212",
+    height: 54,
+    width: 271,
+    backgroundColor: "rgba(251,251,251,1)",
+    borderRadius: 5,
+    lineHeight: 14,
+    fontSize: 18
+  },
+    placeholder3: {
+    top: 423,
     left: 44,
     position: "absolute",
     fontFamily: "roboto-regular",

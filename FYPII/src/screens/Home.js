@@ -1,9 +1,20 @@
-import React, { Component } from "react";
+import React, { Component, useState, useEffect } from "react";
 import { StyleSheet, View, StatusBar, Image, Text } from "react-native";
 import MaterialCommunityIconsIcon from "react-native-vector-icons/MaterialCommunityIcons";
 import HomeHeader from "../components/HomeHeader";
 
 function Home(props) {
+
+  const [drawer, handleDrawer] = useState(false);
+
+  const handlePress = (check) => {
+    handleDrawer(!drawer);
+  };
+
+  useEffect(() => {
+    drawer ? props.navigation.openDrawer() : props.navigation.closeDrawer();
+  });
+
   return (
     <View style={styles.container}>
       <StatusBar hidden />
@@ -87,7 +98,7 @@ function Home(props) {
         </View>
       </View>
       <View style={styles.materialHeader1Row}>
-        <HomeHeader style={styles.materialHeader1}></HomeHeader>
+        <HomeHeader onPress={handlePress} style={styles.materialHeader1}></HomeHeader>
       </View>
     </View>
   );

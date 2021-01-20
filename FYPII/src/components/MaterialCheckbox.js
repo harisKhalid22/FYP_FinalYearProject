@@ -1,12 +1,16 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 function MaterialCheckbox(props) {
+  
+  const [toggleCheckBox, setToggleCheckBox] = useState(false)
+
   return (
     <TouchableOpacity style={[styles.container, props.style]} onPress = {props.onPress}>
       <Icon
-        name={props.checked ? "checkbox-marked" : "checkbox-blank-outline"}
+        name= {toggleCheckBox ? "checkbox-marked" : "checkbox-blank-outline"}
+        onPress={() => setToggleCheckBox(!toggleCheckBox)}
         style={styles.checkIcon}
       ></Icon>
     </TouchableOpacity>

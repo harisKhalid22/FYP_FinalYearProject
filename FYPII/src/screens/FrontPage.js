@@ -8,11 +8,11 @@ import {
   Text
 } from "react-native";
 
-function FrontPage ({navigation})
-{
+function FrontPage ({props, navigation}) {
+  
   setTimeout(() => {
     navigation.navigate("SignIn")
-  }, 3000);
+  }, 6000);
 
   return (
     <View style={styles.container}>

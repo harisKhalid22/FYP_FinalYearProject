@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState, useEffect } from "react";
 import { StyleSheet, View, StatusBar, Image, Text } from "react-native";
 import HomeHeader from "../components/HomeHeader";
 import IndividualCaseDonate from "../components/IndividualCaseDonate";
@@ -6,10 +6,21 @@ import CountDown from 'react-native-countdown-component';
 import ProgressBar from 'react-native-progress/Bar';
 
 function IndividualCase(props) {
+
+  const [drawer, handleDrawer] = useState(false);
+
+  const handlePress = (check) => {
+    handleDrawer(!drawer);
+  };
+
+  useEffect(() => {
+    drawer ? props.navigation.openDrawer() : props.navigation.closeDrawer();
+  });
+
   return (
     <View style={styles.container}>
       <StatusBar hidden />
-      <HomeHeader style={styles.materialHeader1}></HomeHeader>
+      <HomeHeader onPress={handlePress} style={styles.materialHeader1}></HomeHeader>
       <Image
         source={require("../assets/images/120035303_2884387465139993_3107618276911776291_n1.jpg")}
         resizeMode="contain"
@@ -30,6 +41,7 @@ function IndividualCase(props) {
         <Text style={styles.target1}>Target</Text>
       </View>
       <IndividualCaseDonate
+        onPress={()=>{props.navigation.navigate("BankForm")}}      
         style={styles.cupertinoButtonInfo9}
       ></IndividualCaseDonate>
       <View style={styles.rect3}>

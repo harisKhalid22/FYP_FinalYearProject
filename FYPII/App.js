@@ -21,14 +21,13 @@ import BankFormDone from './src/screens/BankFormDone';
 import IndividualCase from './src/screens/IndividualCase';
 
 const DrawerNavigation = createDrawerNavigator({
-  
-  LetsServeHumanity: SignIn,
+  " ": FrontPage,
   Home: Home,
   Donate: Donate,
-  UploadCase: UploadCase,
-  CompletedCases: CompletedCases,
-  AboutUs: AboutUs,
-  ContactUs: ContactUs,
+  "Upload Case": UploadCase,
+  "Completed Cases": CompletedCases,
+  "About Us": AboutUs,
+  "Contact Us": ContactUs,
   Logout: SignIn,
 
   // FrontPage: FrontPage,

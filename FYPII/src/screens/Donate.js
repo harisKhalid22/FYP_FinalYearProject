@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState, useEffect } from "react";
 import {
   StyleSheet,
   View,
@@ -12,6 +12,17 @@ import DonateHeader from "../components/DonateHeader";
 import BankForm from '../screens/BankForm';
 
 function Donate(props) {
+
+  const [drawer, handleDrawer] = useState(false);
+
+  const handlePress = (check) => {
+    handleDrawer(!drawer);
+  };
+
+  useEffect(() => {
+    drawer ? props.navigation.openDrawer() : props.navigation.closeDrawer();
+  });
+
   return (
     <View style={styles.container}>
       <StatusBar hidden />
@@ -34,7 +45,7 @@ function Donate(props) {
           ></CupertinoButtonInfo8>
         </View>
       </ImageBackground>
-      <DonateHeader style={styles.materialHeader1}></DonateHeader>
+      <DonateHeader onPress={handlePress} style={styles.materialHeader1}></DonateHeader>
     </View>
   );
 }

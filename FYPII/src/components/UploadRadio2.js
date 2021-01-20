@@ -1,12 +1,16 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 function UploadRadio2(props) {
+
+  const [selected, setSelected] = useState(false)
+
   return (
     <TouchableOpacity style={[styles.container, props.style]}>
       <Icon
-        name={props.selected ? "radiobox-marked" : "radiobox-blank"}
+        name={selected ? "radiobox-marked" : "radiobox-blank"}
+        onPress={() => setSelected(!selected)}
         style={styles.radioIcon}
       ></Icon>
     </TouchableOpacity>

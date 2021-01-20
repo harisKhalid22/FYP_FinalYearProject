@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState, useEffect } from "react";
 import {
   StyleSheet,
   View,
@@ -11,6 +11,17 @@ import MaterialCommunityIconsIcon from "react-native-vector-icons/MaterialCommun
 import CompletedCasesHeader from "../components/CompletedCasesHeader";
 
 function CompletedCases(props) {
+
+  const [drawer, handleDrawer] = useState(false);
+
+  const handlePress = (check) => {
+    handleDrawer(!drawer);
+  };
+
+  useEffect(() => {
+    drawer ? props.navigation.openDrawer() : props.navigation.closeDrawer();
+  });
+
   return (
     <View style={styles.container}>
       <StatusBar hidden />
@@ -74,7 +85,8 @@ function CompletedCases(props) {
           </View>
         </View>
       </View>
-      <CompletedCasesHeader
+      <CompletedCasesHeader  
+        onPress={handlePress} 
         style={styles.materialHeader1}
       ></CompletedCasesHeader>
     </View>

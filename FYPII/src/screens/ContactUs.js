@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState, useEffect } from "react";
 import {
   StyleSheet,
   View,
@@ -12,11 +12,22 @@ import ContactUsHeader from "../components/ContactUsHeader";
 import ContactUsButton from "../components/ContactUsButton";
 
 function ContactUs(props) {
+
+  const [drawer, handleDrawer] = useState(false);
+
+  const handlePress = (check) => {
+    handleDrawer(!drawer);
+  };
+
+  useEffect(() => {
+    drawer ? props.navigation.openDrawer() : props.navigation.closeDrawer();
+  });
+
   return (
     <View style={styles.container}>
       <StatusBar hidden />
       <View style={styles.materialHeader12Stack}>
-        <ContactUsHeader style={styles.materialHeader12}></ContactUsHeader>
+        <ContactUsHeader onPress={handlePress} style={styles.materialHeader12}></ContactUsHeader>
         <Image
           source={require("../assets/images/contact-us-1.jpg")}
           resizeMode="stretch"

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState, useEffect } from "react";
 import {
   StyleSheet,
   View,
@@ -10,6 +10,17 @@ import {
 import AboutUsHeader from "../components/AboutUsHeader";
 
 function AboutUs(props) {
+
+  const [drawer, handleDrawer] = useState(false);
+
+  const handlePress = (check) => {
+    handleDrawer(!drawer);
+  };
+
+  useEffect(() => {
+    drawer ? props.navigation.openDrawer() : props.navigation.closeDrawer();
+  });
+
   return (
     <View style={styles.container}>
       <StatusBar hidden />
@@ -49,7 +60,7 @@ function AboutUs(props) {
           </Text>
         </ImageBackground>
       </View>
-      <AboutUsHeader style={styles.materialHeader11}></AboutUsHeader>
+      <AboutUsHeader onPress={handlePress} style={styles.materialHeader11}></AboutUsHeader>
     </View>
   );
 }

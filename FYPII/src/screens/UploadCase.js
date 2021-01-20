@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState, useEffect } from "react";
 import {
   StyleSheet,
   View,
@@ -16,6 +16,17 @@ import UploadRadio2 from "../components/UploadRadio2";
 import UploadCaseHeader from "../components/UploadCaseHeader";
 
 function UploadCase(props) {
+
+  const [drawer, handleDrawer] = useState(false);
+
+  const handlePress = (check) => {
+    handleDrawer(!drawer);
+  };
+
+  useEffect(() => {
+    drawer ? props.navigation.openDrawer() : props.navigation.closeDrawer();
+  });
+
   return (
     <View style={styles.container}>
       <StatusBar hidden />
@@ -26,7 +37,7 @@ function UploadCase(props) {
           style={styles.image1}
           imageStyle={styles.image1_imageStyle}
         >
-          <MaterialRadio4 style={styles.materialRadio4}></MaterialRadio4>
+        <MaterialRadio4 style={styles.materialRadio4}></MaterialRadio4>
         </ImageBackground>
         <Text style={styles.caseDetails}>Case Details</Text>
         <TextInput
@@ -77,7 +88,7 @@ function UploadCase(props) {
           verification to approve {"\n"}the case or to reject the case.
         </Text>
       </View>
-      <UploadCaseHeader style={styles.materialHeader1}></UploadCaseHeader>
+      <UploadCaseHeader onPress={handlePress} style={styles.materialHeader1}></UploadCaseHeader>
     </View>
   );
 }

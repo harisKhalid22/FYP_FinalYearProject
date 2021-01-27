@@ -19,9 +19,13 @@ import AboutUs from './src/screens/AboutUs';
 import BankForm from './src/screens/BankForm';
 import BankFormDone from './src/screens/BankFormDone';
 import IndividualCase from './src/screens/IndividualCase';
+import IndividualCase1 from './src/screens/IndividualCase1';
+import IndividualCase2 from './src/screens/IndividualCase2';
+import IndividualCase3 from './src/screens/IndividualCase3';
+import IndividualCase4 from './src/screens/IndividualCase4';
 
 const DrawerNavigation = createDrawerNavigator({
-  " ": FrontPage,
+  " ": IndividualCase,
   Home: Home,
   Donate: Donate,
   "Upload Case": UploadCase,
@@ -68,7 +72,11 @@ const StackNavigation = createStackNavigator(
     CompletedCases: CompletedCases,
     AboutUs: AboutUs,
     ContactUs: ContactUs,
-    IndividualCase: IndividualCase,
+    IndividualCase4: IndividualCase,
+    IndividualCase0: IndividualCase1,
+    IndividualCase1: IndividualCase2,
+    IndividualCase2: IndividualCase3,  
+    IndividualCase3: IndividualCase4,  
   },
   {
     headerMode: 'none',

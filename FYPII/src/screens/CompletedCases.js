@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import MaterialCommunityIconsIcon from "react-native-vector-icons/MaterialCommunityIcons";
 import CompletedCasesHeader from "../components/CompletedCasesHeader";
+import ProgressBar from 'react-native-progress/Bar';
 
 function CompletedCases(props) {
 
@@ -39,9 +40,9 @@ function CompletedCases(props) {
                 style={styles.icon1}
               ></MaterialCommunityIconsIcon>
               <View style={styles.elightAVision1Column}>
-                <Text style={styles.elightAVision1}>Elight a Vision</Text>
-                <Text style={styles.sponsorForA1}>Sponsor For Eye Surgery</Text>
-                <View style={styles.rect1}></View>
+                <Text style={styles.elightAVision1}>Adopt an orphan</Text>
+                <Text style={styles.sponsorForA1}>Rs.5000 - Monthly support to an orphan</Text>
+                <View style={styles.rect1}> <ProgressBar progress={.3} width={245} color={'#0279fa'} borderColor={'#0279fa'} /> </View>
                 <View style={styles.current1Row}>
                   <Text style={styles.current1}>Current</Text>
                   <Text style={styles.target1}>Target</Text>
@@ -57,9 +58,9 @@ function CompletedCases(props) {
               style={styles.icon2}
             ></MaterialCommunityIconsIcon>
             <View style={styles.elightAVision3Column}>
-              <Text style={styles.elightAVision3}>Elight a Vision</Text>
-              <Text style={styles.sponsorForA3}>Sponsor For Eye Surgery</Text>
-              <View style={styles.rect5}></View>
+              <Text style={styles.elightAVision3}>Elight a vision</Text>
+              <Text style={styles.sponsorForA3}>Rs.250000 - Sponsor for eye surgery</Text>
+              <View style={styles.rect5}> <ProgressBar progress={9} width={245} color={'#0279fa'} borderColor={'#0279fa'} /> </View>
               <View style={styles.current3Row}>
                 <Text style={styles.current3}>Current</Text>
                 <Text style={styles.target3}>Target</Text>
@@ -74,9 +75,9 @@ function CompletedCases(props) {
               style={styles.icon3}
             ></MaterialCommunityIconsIcon>
             <View style={styles.elightAVision2Column}>
-              <Text style={styles.elightAVision2}>Elight a Vision</Text>
-              <Text style={styles.sponsorForA2}>Sponsor For Eye Surgery</Text>
-              <View style={styles.rect3}></View>
+              <Text style={styles.elightAVision2}>Food for the hungry</Text>
+              <Text style={styles.sponsorForA2}>Rs.5000 - food for all</Text>
+              <View style={styles.rect3}> <ProgressBar progress={.7} width={245} color={'#0279fa'} borderColor={'#0279fa'} /> </View>
               <View style={styles.current2Row}>
                 <Text style={styles.current2}>Current</Text>
                 <Text style={styles.target2}>Target</Text>

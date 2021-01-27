@@ -4,26 +4,26 @@ import HomeHeader from "../components/HomeHeader";
 import IndividualCaseDonate from "../components/IndividualCaseDonate";
 import CountDown from 'react-native-countdown-component';
 import ProgressBar from 'react-native-progress/Bar';
+import MaterialCommunityIconsIcon from "react-native-vector-icons/MaterialCommunityIcons";
 
-function IndividualCase(props) {
+function IndividualCase2(props) {
   return (
     <View style={styles.container}>
       <StatusBar hidden />
       <HomeHeader onPress={()=>{props.navigation.goBack()}} style={styles.materialHeader1}></HomeHeader>
-      <Image
-        source={require("../assets/images/120035303_2884387465139993_3107618276911776291_n1.jpg")}
-        resizeMode="contain"
+      <MaterialCommunityIconsIcon
+        name="play-circle-outline"
         style={styles.image}
-      ></Image>
-      <Text style={styles.elightAVision}>Elight a Vision</Text>
-      <Text style={styles.sponsorForA}>Sponsor For Eye Surgery</Text>
+      ></MaterialCommunityIconsIcon>
+      <Text style={styles.elightAVision}>Adopt An Orphan</Text>
+      <Text style={styles.sponsorForA}>Rs.5000 - Monthly Support to An Orphan</Text>
       <Text style={styles.text}>
         God loves those who help people pay off their debts. Share this post
         with your friends and family and on social media platforms and donate,
         even if it&#39;s very little. A small donation can make a huge impact.
       </Text>
       <View style={styles.rect1}>
-        <ProgressBar progress={0.2} width={330} color={'#0279fa'} borderColor={'#0279fa'} />
+        <ProgressBar progress={0.7} width={330} color={'#0279fa'} borderColor={'#0279fa'} />
       </View>
       <View style={styles.current1Row}>
         <Text style={styles.current1}>Current</Text>
@@ -59,18 +59,26 @@ const styles = StyleSheet.create({
     height: 56,
     width: 360
   },
+  // image: {
+  //   width: 360,
+  //   height: 250,
+  //   backgroundColor: "rgba(255,255,255,1)",
+  //   marginTop: 33
+  // },
   image: {
     width: 360,
-    height: 250,
+    height: 285,
     backgroundColor: "rgba(255,255,255,1)",
-    marginTop: 33
+    color: "rgba(74,144,226,1)",
+    fontSize: 300,
+    marginLeft: 2,
   },
   elightAVision: {
     fontFamily: "roboto-700",
     color: "#121212",
     fontSize: 20,
-    marginTop: -279,
-    marginLeft: 13
+    marginTop: -281,
+    marginLeft: 5
   },
   sponsorForA: {
     fontFamily: "roboto-regular",
@@ -136,4 +144,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default IndividualCase;
+export default IndividualCase2;

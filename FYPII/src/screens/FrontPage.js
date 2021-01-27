@@ -8,8 +8,8 @@ import {
   Text
 } from "react-native";
 
-function FrontPage ({props, navigation}) {
-  
+function FrontPage({ props, navigation }) {
+
   setTimeout(() => {
     navigation.navigate("SignIn")
   }, 6000);

@@ -4,7 +4,7 @@ import { StyleSheet, TouchableOpacity, Text } from "react-native";
 function CupertinoButtonInfo4(props) {
   return (
     <TouchableOpacity style={[styles.container, props.style]} onPress = {props.onPress}>
-      <Text style={styles.search}>Search</Text>
+      <Text style={styles.search}>Enter</Text>
     </TouchableOpacity>
   );
 }

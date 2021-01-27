@@ -12,10 +12,33 @@ import CupertinoButtonInfo3 from "../components/CupertinoButtonInfo3";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import CupertinoButtonInfo from "../components/CupertinoButtonInfo";
 import CupertinoButtonInfo2 from "../components/CupertinoButtonInfo2";
+import axios from "axios";
 
 function SignIn(props) {
-  
+  const [form, setForm] = useState({
+    username: "",
+    password: ""
+  })
+  const domain = "http://192.168.1.100:3000"
+  const onChangeHandler = (val, field) => {
+    setForm({
+      ...form,
+      [field]: val
+    })
+  }
   const [hidePass, setHidePass] = useState(true);
+
+  const onSubmitHandler = async () => {
+    try {
+      console.log(form);
+      let result = await axios.post(`${domain}/users/login`, form)
+      console.log(result);
+      props.navigation.navigate("Home")
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
 
   return (
     <View style={styles.container}>
@@ -32,10 +55,10 @@ function SignIn(props) {
           style={styles.image2}
           imageStyle={styles.image2_imageStyle}
         >
-        <CupertinoButtonInfo3
-          onPress={()=>{props.navigation.navigate("SignUp")}}
-          style={styles.cupertinoButtonInfo3}
-        ></CupertinoButtonInfo3>
+          <CupertinoButtonInfo3
+            onPress={() => { props.navigation.navigate("SignUp") }}
+            style={styles.cupertinoButtonInfo3}
+          ></CupertinoButtonInfo3>
         </ImageBackground>
         <Text style={styles.text}>Sign In</Text>
         <Text style={styles.loremIpsum}>Hi there! Nice to see you again.</Text>
@@ -44,6 +67,8 @@ function SignIn(props) {
           inlineImagePadding={0}
           placeholderTextColor="rgba(155,155,155,1)"
           style={styles.textInput}
+          value={form.username}
+          onChangeText={(txt) => { onChangeHandler(txt, "username") }}
         ></TextInput>
         <TextInput
           placeholder=" Password"
@@ -51,17 +76,22 @@ function SignIn(props) {
           secureTextEntry={hidePass ? true : false}
           placeholderTextColor="rgba(155,155,155,1)"
           style={styles.textInput1}
+          value={form.password}
+          onChangeText={(txt) => { onChangeHandler(txt, "password") }}
+
         ></TextInput>
-        <Icon 
-          name= {hidePass ? 'visibility-off' : 'visibility'}
+        <Icon
+          name={hidePass ? 'visibility-off' : 'visibility'}
           onPress={() => setHidePass(!hidePass)}
-          style={styles.icon}/>
+          style={styles.icon} />
         <CupertinoButtonInfo
-          onPress={()=>{props.navigation.navigate("Home")}}
+          onPress={() => {
+            onSubmitHandler();
+          }}
           style={styles.cupertinoButtonInfo}
         ></CupertinoButtonInfo>
         <CupertinoButtonInfo2
-          onPress={()=>{props.navigation.navigate("ForgotPassword")}}
+          onPress={() => { props.navigation.navigate("ForgotPassword") }}
           style={styles.cupertinoButtonInfo2}
         ></CupertinoButtonInfo2>
       </View>

@@ -5,7 +5,7 @@ import IndividualCaseDonate from "../components/IndividualCaseDonate";
 import CountDown from 'react-native-countdown-component';
 import ProgressBar from 'react-native-progress/Bar';
 
-function IndividualCase(props) {
+function IndividualCase4(props) {
   return (
     <View style={styles.container}>
       <StatusBar hidden />
@@ -15,8 +15,8 @@ function IndividualCase(props) {
         resizeMode="contain"
         style={styles.image}
       ></Image>
-      <Text style={styles.elightAVision}>Elight a Vision</Text>
-      <Text style={styles.sponsorForA}>Sponsor For Eye Surgery</Text>
+      <Text style={styles.elightAVision}>Food For The Hungry</Text>
+      <Text style={styles.sponsorForA}>Rs.5000 - Food for All</Text>
       <Text style={styles.text}>
         God loves those who help people pay off their debts. Share this post
         with your friends and family and on social media platforms and donate,
@@ -36,7 +36,7 @@ function IndividualCase(props) {
       <View style={styles.rect3}>
         <CountDown
           size={20}
-          until={1000000}
+          until={100000}
           onFinish={() => alert('Case Duration is Finished.')}
           digitStyle={{backgroundColor: '#FFF', borderWidth: 1, borderColor: '#737373'}}
           digitTxtStyle={{color: '#737373'}}
@@ -136,4 +136,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default IndividualCase;
+export default IndividualCase4;

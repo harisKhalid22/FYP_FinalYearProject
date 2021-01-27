@@ -14,8 +14,41 @@ import UploadRadio1 from "../components/UploadRadio1";
 import UploadRadio3 from "../components/UploadRadio3";
 import UploadRadio2 from "../components/UploadRadio2";
 import UploadCaseHeader from "../components/UploadCaseHeader";
+import axios from 'axios';
+import RadioBtn from '../components/CustomRadioBtn';
+import { Snackbar } from "react-native-paper"
 
 function UploadCase(props) {
+  const [form, setForm] = useState({
+    name: "",
+    phone: "",
+    cnicNumber: "",
+    address: "",
+    zakathAcceptable: true,
+    sadhakaAcceptable: false,
+    caseDescription: "",
+    requiredAmount: ""
+  });
+  const domain = "http://192.168.1.100:3000"
+  const onChangeHandler = (val, field) => {
+    setForm({
+      ...form,
+      [field]: val
+    })
+  }
+
+  const uploadCase = async () => {
+    try {
+      console.log(form);
+      let result = await axios.post(`${domain}/uploadCase/create`, form)
+      onToggleSnackBar("Successful")
+      props.navigation.navigate("UploadCaseDone")
+      console.log(result);
+    } catch (error) {
+      console.log(error)
+      onToggleSnackBar("Error")
+    }
+  }
 
   const [drawer, handleDrawer] = useState(false);
 
@@ -27,9 +60,34 @@ function UploadCase(props) {
     drawer ? props.navigation.openDrawer() : props.navigation.closeDrawer();
   });
 
+  const [visible, setVisible] = React.useState(false);
+  const [snackMessage, setSnackMessage] = React.useState("");
+
+
+  const onToggleSnackBar = (txt) => {
+    setSnackMessage(txt)
+    setVisible(!visible)
+  };
+
+  const onDismissSnackBar = () => {
+    setSnackMessage("")
+    setVisible(false)
+  };
+
   return (
     <View style={styles.container}>
       <StatusBar hidden />
+      <Snackbar
+        visible={visible}
+        onDismiss={onDismissSnackBar}
+        action={{
+          label: 'Undo',
+          onPress: () => {
+            // Do something
+          },
+        }}>
+        {snackMessage}
+      </Snackbar>
       <View style={styles.image1Stack}>
         <ImageBackground
           source={require("../assets/images/Webp.net-resizeimage1.png")}
@@ -37,49 +95,80 @@ function UploadCase(props) {
           style={styles.image1}
           imageStyle={styles.image1_imageStyle}
         >
-        <MaterialRadio4 style={styles.materialRadio4}></MaterialRadio4>
+          <MaterialRadio4 style={styles.materialRadio4}></MaterialRadio4>
         </ImageBackground>
         <Text style={styles.caseDetails}>Case Details</Text>
         <TextInput
           placeholder=" Name"
           placeholderTextColor="rgba(155,155,155,1)"
           style={styles.placeholder1}
+          value={form.name}
+          onChangeText={(txt) => {
+            onChangeHandler(txt, "name")
+          }}
         ></TextInput>
         <TextInput
           placeholder=" Phone"
           placeholderTextColor="rgba(155,155,155,1)"
           style={styles.placeholder2}
+          value={form.phone}
+          onChangeText={(txt) => {
+            onChangeHandler(txt, "phone")
+          }}
         ></TextInput>
         <TextInput
           placeholder=" CNIC No"
           placeholderTextColor="rgba(155,155,155,1)"
           style={styles.placeholder4}
+          value={form.cnicNumber}
+          onChangeText={(txt) => {
+            onChangeHandler(txt, "cnicNumber")
+          }}
         ></TextInput>
         <TextInput
           placeholder=" Required Amount"
           placeholderTextColor="rgba(155,155,155,1)"
           style={styles.placeholder5}
+          value={form.requiredAmount}
+          onChangeText={(txt) => {
+            onChangeHandler(txt, "requiredAmount")
+          }}
         ></TextInput>
         <TextInput
           placeholder=" Case Description"
           placeholderTextColor="rgba(155,155,155,1)"
           style={styles.placeholder6}
+          value={form.caseDescription}
+          onChangeText={(txt) => {
+            onChangeHandler(txt, "caseDescription")
+          }}
+
         ></TextInput>
         <TextInput
           placeholder=" Address"
           placeholderTextColor="rgba(155,155,155,1)"
           style={styles.placeholder7}
+          value={form.address}
+          onChangeText={(txt) => {
+            onChangeHandler(txt, "address")
+          }}
         ></TextInput>
-        <Text style={styles.zakathAcceptable}>Zakath Acceptable</Text>
+        <Text
+          style={styles.zakathAcceptable}
+        >Zakath Acceptable</Text>
         <Text style={styles.sadhakaAcceptable}>Sadhaka Acceptable</Text>
         <MaterialButtonViolet6
-          onPress={()=>{props.navigation.navigate("UploadCaseDone")}}
+          onPress={() => {
+            uploadCase()
+          }}
           style={styles.materialButtonViolet6}
         ></MaterialButtonViolet6>
+
         <Text style={styles.yes1}>Yes</Text>
         <Text style={styles.yes2}>Yes</Text>
         <Text style={styles.no1}>No</Text>
         <Text style={styles.no2}>No</Text>
+
         <UploadRadio1 style={styles.materialRadio5}></UploadRadio1>
         <UploadRadio3 style={styles.materialRadio1}></UploadRadio3>
         <UploadRadio2 style={styles.materialRadio3}></UploadRadio2>

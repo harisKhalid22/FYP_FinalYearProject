@@ -5,7 +5,7 @@ import IndividualCaseDonate from "../components/IndividualCaseDonate";
 import CountDown from 'react-native-countdown-component';
 import ProgressBar from 'react-native-progress/Bar';
 
-function IndividualCase(props) {
+function IndividualCase3(props) {
   return (
     <View style={styles.container}>
       <StatusBar hidden />
@@ -15,15 +15,15 @@ function IndividualCase(props) {
         resizeMode="contain"
         style={styles.image}
       ></Image>
-      <Text style={styles.elightAVision}>Elight a Vision</Text>
-      <Text style={styles.sponsorForA}>Sponsor For Eye Surgery</Text>
+      <Text style={styles.elightAVision}>Adopt An Student</Text>
+      <Text style={styles.sponsorForA}>Rs.7000 - Light a Career Path</Text>
       <Text style={styles.text}>
         God loves those who help people pay off their debts. Share this post
         with your friends and family and on social media platforms and donate,
         even if it&#39;s very little. A small donation can make a huge impact.
       </Text>
       <View style={styles.rect1}>
-        <ProgressBar progress={0.2} width={330} color={'#0279fa'} borderColor={'#0279fa'} />
+        <ProgressBar progress={0.7} width={330} color={'#0279fa'} borderColor={'#0279fa'} />
       </View>
       <View style={styles.current1Row}>
         <Text style={styles.current1}>Current</Text>
@@ -136,4 +136,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default IndividualCase;
+export default IndividualCase3;

@@ -12,12 +12,37 @@ import MaterialButtonViolet3 from "../components/MaterialButtonViolet3";
 import MaterialIconsIcon from "react-native-vector-icons/MaterialIcons";
 import CupertinoButtonInfo1 from "../components/CupertinoButtonInfo1";
 import MaterialCheckbox from "../components/MaterialCheckbox";
+import axios from "axios";
 
 function SignUp(props) {
 
   const [hidePass1, setHidePass1] = useState(true);
   const [hidePass2, setHidePass2] = useState(true);
+  const [form, setForm] = useState({
+    username: "",
+    password: "",
+    confirmPassword: "",
+    email: "",
+    phone: ""
+  })
+  const domain = "http://192.168.1.100:3000"
+  const onChangeHandler = (val, field) => {
+    setForm({
+      ...form,
+      [field]: val
+    })
+  }
 
+  const onSubmitHandler = async () => {
+    try {
+      console.log(form);
+      let result = await axios.post(`${domain}/users/`, form)
+      console.log(result);
+      props.navigation.navigate("SignIn")
+    } catch (error) {
+      console.log(error)
+    }
+  }
   return (
     <View style={styles.container}>
       <StatusBar hidden />
@@ -28,16 +53,18 @@ function SignUp(props) {
           style={styles.image1}
           imageStyle={styles.image1_imageStyle}
         >
-        <MaterialButtonViolet3
-          onPress={()=>{props.navigation.navigate("SignIn")}}
-          style={styles.materialButtonViolet3}
-        ></MaterialButtonViolet3>
+          <MaterialButtonViolet3
+            onPress={() => { props.navigation.navigate("SignIn") }}
+            style={styles.materialButtonViolet3}
+          ></MaterialButtonViolet3>
         </ImageBackground>
         <Text style={styles.text}>Sign Up</Text>
         <TextInput
           placeholder=" Username"
           placeholderTextColor="rgba(155,155,155,1)"
           style={styles.yourUsername}
+          value={form.username}
+          onChangeText={(txt) => { onChangeHandler(txt, "username") }}
         ></TextInput>
         <TextInput
           placeholder=" Password"
@@ -45,6 +72,8 @@ function SignUp(props) {
           secureTextEntry={hidePass1 ? true : false}
           placeholderTextColor="rgba(155,155,155,1)"
           style={styles.yourUsername1}
+          value={form.password}
+          onChangeText={(txt) => { onChangeHandler(txt, "password") }}
         ></TextInput>
         <TextInput
           placeholder=" Confirm Password"
@@ -52,14 +81,16 @@ function SignUp(props) {
           secureTextEntry={hidePass2 ? true : false}
           placeholderTextColor="rgba(155,155,155,1)"
           style={styles.yourUsername2}
+          value={form.confirmPassword}
+          onChangeText={(txt) => { onChangeHandler(txt, "confirmPassword") }}
         ></TextInput>
         <MaterialIconsIcon
-          name= {hidePass1 ? 'visibility-off' : 'visibility'}
+          name={hidePass1 ? 'visibility-off' : 'visibility'}
           onPress={() => setHidePass1(!hidePass1)}
           style={styles.icon}
         ></MaterialIconsIcon>
         <MaterialIconsIcon
-          name= {hidePass2 ? 'visibility-off' : 'visibility'}
+          name={hidePass2 ? 'visibility-off' : 'visibility'}
           onPress={() => setHidePass2(!hidePass2)}
           style={styles.icon1}
         ></MaterialIconsIcon>
@@ -67,21 +98,26 @@ function SignUp(props) {
           placeholder=" Email"
           placeholderTextColor="rgba(155,155,155,1)"
           style={styles.yourUsername3}
+          value={form.email}
+          onChangeText={(txt) => { onChangeHandler(txt, "email") }}
         ></TextInput>
         <TextInput
           placeholder=" Phone"
           placeholderTextColor="rgba(155,155,155,1)"
           style={styles.yourUsername4}
+          value={form.phone}
+          onChangeText={(txt) => { onChangeHandler(txt, "phone") }}
         ></TextInput>
         <Text style={styles.loremIpsum}>
           I agree to the Terms of Services {"\n"}and Privacy Policy.
         </Text>
         <Text style={styles.haveAnAccount}>Have an Account?</Text>
         <CupertinoButtonInfo1
-          onPress={()=>{props.navigation.navigate("SignIn")}}
+
+          onPress={() => { onSubmitHandler() }}
           style={styles.cupertinoButtonInfo1}
         ></CupertinoButtonInfo1>
-        <MaterialCheckbox 
+        <MaterialCheckbox
           style={styles.materialCheckbox}></MaterialCheckbox>
       </View>
     </View>

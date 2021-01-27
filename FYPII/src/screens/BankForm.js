@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState, useEffect } from "react";
 import {
   StyleSheet,
   View,
@@ -12,8 +12,69 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import BankFormButton from "../components/BankFormButton";
 import MaterialToast1 from "../components/MaterialToast1";
 import DonateHeader from "../components/DonateHeader";
+import axios from 'axios';
+import RadioBtn from '../components/CustomRadioBtn';
+import { Snackbar } from "react-native-paper"
 
 function BankForm(props) {
+
+  const [form, setForm] = useState({
+    amountOfDonation: "",
+    email: "",
+    cardNumber: "",
+    "MM / YY": "",
+    CVC: "",
+    name: "",
+    phone: "",
+    cnicNumber: ""
+  });
+
+  const domain = "http://192.168.1.100:3000"
+
+  const onChangeHandler = (val, field) => {
+    setForm({
+      ...form,
+      [field]: val
+    })
+  }
+
+  const bankForm = async () => {
+    try {
+      console.log(form);
+      let result = await axios.post(`${domain}/makeDonation/create`, form)
+      onToggleSnackBar("Successful")
+      props.navigation.navigate("BankFormDone")
+      console.log(result);
+    } catch (error) {
+      console.log(error)
+      onToggleSnackBar("Error")
+    }
+  }
+
+  // const [drawer, handleDrawer] = useState(false);
+
+  // const handlePress = (check) => {
+  //   handleDrawer(!drawer);
+  // };
+
+  // useEffect(() => {
+  //   drawer ? props.navigation.openDrawer() : props.navigation.closeDrawer();
+  // });
+
+  const [visible, setVisible] = React.useState(false);
+  const [snackMessage, setSnackMessage] = React.useState("");
+
+
+  const onToggleSnackBar = (txt) => {
+    setSnackMessage(txt)
+    setVisible(!visible)
+  };
+
+  const onDismissSnackBar = () => {
+    setSnackMessage("")
+    setVisible(false)
+  };
+
   return (
     <View style={styles.container}>
       <StatusBar hidden />
@@ -24,46 +85,92 @@ function BankForm(props) {
           style={styles.image1}
           imageStyle={styles.image1_imageStyle}
         >
-          <View style={styles.rect1}>
-            <Icon name="gift" style={styles.icon1}></Icon>
-          </View>
+        <View style={styles.rect1}>
+          <Icon name="gift" style={styles.icon1}></Icon>
+        </View>
         </ImageBackground>
+        <TextInput
+          placeholder=" Name"
+          placeholderTextColor="rgba(155,155,155,1)"
+          style={styles.name}
+          value={form.name}
+          onChangeText={(txt) => {
+            onChangeHandler(txt, "name")
+          }}
+        ></TextInput>
         <TextInput
           placeholder=" CVC"
           placeholderTextColor="rgba(155,155,155,1)"
-          style={styles.placeholder1}
+          style={styles.cvc}
+          // value={form.CVC}
+          // onChangeText={(txt) => {
+          //   onChangeHandler(txt, "CVC")
+          // }}
+        ></TextInput>
+        <TextInput
+          placeholder=" Phone"
+          placeholderTextColor="rgba(155,155,155,1)"
+          style={styles.phone}
+          value={form.phone}
+          onChangeText={(txt) => {
+            onChangeHandler(txt, "phone")
+          }}
+        ></TextInput>
+        <TextInput
+          placeholder=" CNIC"
+          placeholderTextColor="rgba(155,155,155,1)"
+          style={styles.cnic}
+          value={form.cnicNumber}
+          onChangeText={(txt) => {
+            onChangeHandler(txt, "cnicNumber")
+          }}
         ></TextInput>
         <TextInput
           placeholder=" MM / YY"
           placeholderTextColor="rgba(155,155,155,1)"
-          style={styles.placeholder2}
+          style={styles.monthYear}
+          // value={form.{{MM / YY"}}}
+          // onChangeText={(txt) => {
+          //   onChangeHandler(txt, "MM / YY")
+          // }}
         ></TextInput>
         <TextInput
           placeholder=" Card number"
           placeholderTextColor="rgba(155,155,155,1)"
-          style={styles.placeholder3}
+          style={styles.cardNumber}
+          value={form.cardNumber}
+          onChangeText={(txt) => {
+            onChangeHandler(txt, "cardNumber")
+          }}
         ></TextInput>
         <TextInput
           placeholder=" Email"
           placeholderTextColor="rgba(155,155,155,1)"
-          style={styles.placeholder4}
+          style={styles.email}
+          value={form.email}
+          onChangeText={(txt) => {
+            onChangeHandler(txt, "email")
+          }}
         ></TextInput>
         <Text style={styles.bankTransfer}>Bank Transfer</Text>
         <Text style={styles.loremIpsum1}>Donate to Serve Humanity</Text>
         <TextInput
           placeholder=" Amount in PKR"
           placeholderTextColor="rgba(155,155,155,1)"
-          style={styles.placeholder5}
+          style={styles.amount}
+          value={form.amountOfDonation}
+          onChangeText={(txt) => {
+            onChangeHandler(txt, "amountOfDonation")
+          }}
         ></TextInput>
-        <BankFormButton 
-        onPress={()=>{props.navigation.navigate("BankFormDone")}}
+        <BankFormButton
+          onPress={() => {
+            bankForm()
+          }}
         style={styles.cupertinoButtonInfo9}>
         </BankFormButton>
-        <MaterialToast1
-          text1="Success"
-          style={styles.materialToast1}
-        ></MaterialToast1>
         <DonateHeader style={styles.materialHeader1}></DonateHeader>
+        {/* onPress={handlePress}  */}
       </View>
     </View>
   );
@@ -97,8 +204,8 @@ const styles = StyleSheet.create({
     marginTop: 16,
     marginLeft: 119
   },
-  placeholder1: {
-    top: 487,
+  name: {
+    top: 507,
     left: 47,
     position: "absolute",
     fontFamily: "roboto-regular",
@@ -110,8 +217,8 @@ const styles = StyleSheet.create({
     lineHeight: 14,
     fontSize: 17
   },
-  placeholder2: {
-    top: 445,
+  phone: {
+    top: 549,
     left: 47,
     position: "absolute",
     fontFamily: "roboto-regular",
@@ -123,8 +230,8 @@ const styles = StyleSheet.create({
     lineHeight: 14,
     fontSize: 17
   },
-  placeholder3: {
-    top: 403,
+  cnic: {
+    top: 591,
     left: 47,
     position: "absolute",
     fontFamily: "roboto-regular",
@@ -136,8 +243,47 @@ const styles = StyleSheet.create({
     lineHeight: 14,
     fontSize: 17
   },
-  placeholder4: {
-    top: 361,
+  cvc: {
+    top: 465,
+    left: 47,
+    position: "absolute",
+    fontFamily: "roboto-regular",
+    color: "#121212",
+    height: 37,
+    width: 265,
+    backgroundColor: "rgba(251,251,251,1)",
+    borderRadius: 5,
+    lineHeight: 14,
+    fontSize: 17
+  },
+  monthYear: {
+    top: 424,
+    left: 47,
+    position: "absolute",
+    fontFamily: "roboto-regular",
+    color: "#121212",
+    height: 37,
+    width: 265,
+    backgroundColor: "rgba(251,251,251,1)",
+    borderRadius: 5,
+    lineHeight: 14,
+    fontSize: 17
+  },
+  cardNumber: {
+    top: 383,
+    left: 47,
+    position: "absolute",
+    fontFamily: "roboto-regular",
+    color: "#121212",
+    height: 37,
+    width: 265,
+    backgroundColor: "rgba(251,251,251,1)",
+    borderRadius: 5,
+    lineHeight: 14,
+    fontSize: 17
+  },
+  email: {
+    top: 341,
     left: 47,
     position: "absolute",
     fontFamily: "roboto-regular",
@@ -150,7 +296,7 @@ const styles = StyleSheet.create({
     fontSize: 17
   },
   bankTransfer: {
-    top: 259,
+    top: 242,
     left: 49,
     position: "absolute",
     fontFamily: "roboto-700",
@@ -158,7 +304,7 @@ const styles = StyleSheet.create({
     fontSize: 25
   },
   loremIpsum1: {
-    top: 289,
+    top: 269,
     left: 49,
     position: "absolute",
     fontFamily: "roboto-regular",
@@ -167,8 +313,8 @@ const styles = StyleSheet.create({
     width: 261,
     fontSize: 15
   },
-  placeholder5: {
-    top: 319,
+  amount: {
+    top: 300,
     left: 48,
     position: "absolute",
     fontFamily: "roboto-regular",
@@ -185,16 +331,8 @@ const styles = StyleSheet.create({
     width: 163,
     position: "absolute",
     left: 100,
-    top: 534,
+    top: 640,
     borderRadius: 10
-  },
-  materialToast1: {
-    width: 280,
-    height: 35,
-    position: "absolute",
-    left: 39,
-    top: 686,
-    overflow: "hidden"
   },
   materialHeader1: {
     height: 56,

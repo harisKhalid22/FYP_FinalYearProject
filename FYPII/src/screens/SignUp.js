@@ -18,6 +18,7 @@ function SignUp(props) {
 
   const [hidePass1, setHidePass1] = useState(true);
   const [hidePass2, setHidePass2] = useState(true);
+
   const [form, setForm] = useState({
     username: "",
     password: "",
@@ -25,7 +26,8 @@ function SignUp(props) {
     email: "",
     phone: ""
   })
-  const domain = "http://192.168.1.100:3000"
+
+  const domain = "http://192.168.1.104:3000"
   const onChangeHandler = (val, field) => {
     setForm({
       ...form,
@@ -43,6 +45,51 @@ function SignUp(props) {
       console.log(error)
     }
   }
+
+  const [textInputUsername, setTextInputUsername] = useState('');
+  const [textInputPassword, setInputTextPassword] = useState('');
+  const [textInputConfirmPassword, setTextInputConfirmPassword] = useState('');
+  const [textInputEmail, setTextInputEmail] = useState('');
+  const [textInputPhone, setTextInputPhone] = useState('');
+
+  const checkTextInput = () => {
+  
+    if (!textInputUsername.trim()) {
+      alert('Please Enter Username');
+      return;
+    }
+
+    if (!textInputPassword.trim()) {
+      alert('Please Enter Password');
+      return;
+    }
+
+    if (!textInputConfirmPassword.trim()) {
+      alert('Please Enter Confirm Password');
+      return;
+    }
+
+    if (!textInputEmail.trim()) {
+      alert('Please Enter Email');
+      return;
+    }
+
+    if (!textInputPhone.trim()) {
+      alert('Please Enter Phone');
+      return;
+    }
+
+    if (textInputPassword.trim() == textInputConfirmPassword.trim()) {
+      //Checked Successfully
+      onSubmitHandler();
+      return;
+    }
+    else {
+      alert('Password Is Not Same.');
+    }
+  };
+
+
   return (
     <View style={styles.container}>
       <StatusBar hidden />
@@ -53,10 +100,10 @@ function SignUp(props) {
           style={styles.image1}
           imageStyle={styles.image1_imageStyle}
         >
-          <MaterialButtonViolet3
-            onPress={() => { props.navigation.navigate("SignIn") }}
-            style={styles.materialButtonViolet3}
-          ></MaterialButtonViolet3>
+        <MaterialButtonViolet3
+          onPress={() => { props.navigation.navigate("SignIn") }}
+          style={styles.materialButtonViolet3}
+        ></MaterialButtonViolet3>
         </ImageBackground>
         <Text style={styles.text}>Sign Up</Text>
         <TextInput
@@ -64,7 +111,9 @@ function SignUp(props) {
           placeholderTextColor="rgba(155,155,155,1)"
           style={styles.yourUsername}
           value={form.username}
-          onChangeText={(txt) => { onChangeHandler(txt, "username") }}
+          onChangeText={(txt) => { onChangeHandler(txt, "username"), setTextInputUsername(txt) }} 
+          maxLength={15}
+
         ></TextInput>
         <TextInput
           placeholder=" Password"
@@ -73,7 +122,9 @@ function SignUp(props) {
           placeholderTextColor="rgba(155,155,155,1)"
           style={styles.yourUsername1}
           value={form.password}
-          onChangeText={(txt) => { onChangeHandler(txt, "password") }}
+          onChangeText={(txt) => { onChangeHandler(txt, "password"), setInputTextPassword(txt) }} 
+          maxLength={15}
+
         ></TextInput>
         <TextInput
           placeholder=" Confirm Password"
@@ -82,7 +133,9 @@ function SignUp(props) {
           placeholderTextColor="rgba(155,155,155,1)"
           style={styles.yourUsername2}
           value={form.confirmPassword}
-          onChangeText={(txt) => { onChangeHandler(txt, "confirmPassword") }}
+          onChangeText={(txt) => { onChangeHandler(txt, "confirmPassword"), setTextInputConfirmPassword(txt) }} 
+          maxLength={15}
+          
         ></TextInput>
         <MaterialIconsIcon
           name={hidePass1 ? 'visibility-off' : 'visibility'}
@@ -99,22 +152,25 @@ function SignUp(props) {
           placeholderTextColor="rgba(155,155,155,1)"
           style={styles.yourUsername3}
           value={form.email}
-          onChangeText={(txt) => { onChangeHandler(txt, "email") }}
+          onChangeText={(txt) => { onChangeHandler(txt, "email"), setTextInputEmail(txt) }} 
+          maxLength={15}
+          
         ></TextInput>
         <TextInput
           placeholder=" Phone"
           placeholderTextColor="rgba(155,155,155,1)"
           style={styles.yourUsername4}
           value={form.phone}
-          onChangeText={(txt) => { onChangeHandler(txt, "phone") }}
+          onChangeText={(txt) => { onChangeHandler(txt, "phone"), setTextInputPhone(txt) }} 
+          maxLength={15}
+          
         ></TextInput>
         <Text style={styles.loremIpsum}>
           I agree to the Terms of Services {"\n"}and Privacy Policy.
         </Text>
         <Text style={styles.haveAnAccount}>Have an Account?</Text>
         <CupertinoButtonInfo1
-
-          onPress={() => { onSubmitHandler() }}
+          onPress={() => { checkTextInput() }}
           style={styles.cupertinoButtonInfo1}
         ></CupertinoButtonInfo1>
         <MaterialCheckbox

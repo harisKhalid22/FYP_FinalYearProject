@@ -29,7 +29,7 @@ function UploadCase(props) {
     caseDescription: "",
     requiredAmount: ""
   });
-  const domain = "http://192.168.1.100:3000"
+  const domain = "http://192.168.1.104:3000"
   const onChangeHandler = (val, field) => {
     setForm({
       ...form,
@@ -73,6 +73,48 @@ function UploadCase(props) {
     setSnackMessage("")
     setVisible(false)
   };
+  
+  const [textInputUsername, setTextUsername] = useState('');
+  const [textInputPhone, setTextPhone] = useState('');
+  const [textInputCnic, setTextCnic] = useState('');
+  const [textInputAddress, setTextAddress] = useState('');
+  const [textInputAmount, setTextAmount] = useState('');
+  const [textInputDescription, setTextDescription] = useState('');
+
+  const checkTextInput = () => {
+  
+    if (!textInputUsername.trim()) {
+      alert('Please Enter Name');
+      return;
+    }
+
+    if (!textInputPhone.trim()) {
+      alert('Please Enter Phone');
+      return;
+    }
+
+    if (!textInputCnic.trim()) {
+      alert('Please Enter CNIC');
+      return;
+    }
+
+    if (!textInputAddress.trim()) {
+      alert('Please Enter Address');
+      return;
+    }
+
+    if (!textInputAmount.trim()) {
+      alert('Please Enter Required Amount');
+      return;
+    }
+
+    if (!textInputDescription.trim()) {
+      alert('Please Enter Case Description');
+      return;
+    }
+    //Checked Successfully
+    uploadCase();
+  };
 
   return (
     <View style={styles.container}>
@@ -103,45 +145,44 @@ function UploadCase(props) {
           placeholderTextColor="rgba(155,155,155,1)"
           style={styles.placeholder1}
           value={form.name}
-          onChangeText={(txt) => {
-            onChangeHandler(txt, "name")
-          }}
+          onChangeText={(txt) => { onChangeHandler(txt, "name"), setTextUsername(txt) }} 
+          maxLength={15}
+
         ></TextInput>
         <TextInput
           placeholder=" Phone"
           placeholderTextColor="rgba(155,155,155,1)"
           style={styles.placeholder2}
           value={form.phone}
-          onChangeText={(txt) => {
-            onChangeHandler(txt, "phone")
-          }}
+          onChangeText={(txt) => { onChangeHandler(txt, "phone"), setTextPhone(txt) }} 
+          maxLength={15}
+
         ></TextInput>
         <TextInput
           placeholder=" CNIC No"
           placeholderTextColor="rgba(155,155,155,1)"
           style={styles.placeholder4}
           value={form.cnicNumber}
-          onChangeText={(txt) => {
-            onChangeHandler(txt, "cnicNumber")
-          }}
+          onChangeText={(txt) => { onChangeHandler(txt, "cnicNumber"), setTextCnic(txt) }} 
+          maxLength={15}
+
         ></TextInput>
         <TextInput
           placeholder=" Required Amount"
           placeholderTextColor="rgba(155,155,155,1)"
           style={styles.placeholder5}
           value={form.requiredAmount}
-          onChangeText={(txt) => {
-            onChangeHandler(txt, "requiredAmount")
-          }}
+          onChangeText={(txt) => { onChangeHandler(txt, "requiredAmount"), setTextAmount(txt) }} 
+          maxLength={15}
+
         ></TextInput>
         <TextInput
           placeholder=" Case Description"
           placeholderTextColor="rgba(155,155,155,1)"
           style={styles.placeholder6}
           value={form.caseDescription}
-          onChangeText={(txt) => {
-            onChangeHandler(txt, "caseDescription")
-          }}
+          onChangeText={(txt) => { onChangeHandler(txt, "caseDescription"), setTextDescription(txt) }} 
+          maxLength={50}
 
         ></TextInput>
         <TextInput
@@ -149,9 +190,9 @@ function UploadCase(props) {
           placeholderTextColor="rgba(155,155,155,1)"
           style={styles.placeholder7}
           value={form.address}
-          onChangeText={(txt) => {
-            onChangeHandler(txt, "address")
-          }}
+          onChangeText={(txt) => { onChangeHandler(txt, "address"), setTextAddress(txt) }} 
+          maxLength={15}
+
         ></TextInput>
         <Text
           style={styles.zakathAcceptable}
@@ -159,7 +200,7 @@ function UploadCase(props) {
         <Text style={styles.sadhakaAcceptable}>Sadhaka Acceptable</Text>
         <MaterialButtonViolet6
           onPress={() => {
-            uploadCase()
+            checkTextInput()
           }}
           style={styles.materialButtonViolet6}
         ></MaterialButtonViolet6>

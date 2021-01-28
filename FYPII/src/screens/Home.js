@@ -6,7 +6,7 @@ import ProgressBar from 'react-native-progress/Bar';
 import axios from "axios";
 
 function Home(props) {
-  const domain = "http://192.168.1.100:3000"
+  const domain = "http://192.168.1.104:3000"
 
   const [drawer, handleDrawer] = useState(false);
   const [data, setData] = useState([]);

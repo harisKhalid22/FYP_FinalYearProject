@@ -19,13 +19,15 @@ function SignIn(props) {
     username: "",
     password: ""
   })
-  const domain = "http://192.168.1.100:3000"
+
+  const domain = "http://192.168.1.104:3000"
   const onChangeHandler = (val, field) => {
     setForm({
       ...form,
       [field]: val
     })
   }
+
   const [hidePass, setHidePass] = useState(true);
 
   const onSubmitHandler = async () => {
@@ -39,6 +41,23 @@ function SignIn(props) {
     }
   }
 
+  const [textInputUsername, setTextInputUsername] = useState('');
+  const [textInputPassword, setTextInputPassword] = useState('');
+
+  const checkTextInput = () => {
+
+    if (!textInputUsername.trim()) {
+      alert('Please Enter Username');
+      return;
+    }
+    
+    if (!textInputPassword.trim()) {
+      alert('Please Enter Password');
+      return;
+    }
+    //Checked Successfully
+    onSubmitHandler();
+  };
 
   return (
     <View style={styles.container}>
@@ -55,10 +74,10 @@ function SignIn(props) {
           style={styles.image2}
           imageStyle={styles.image2_imageStyle}
         >
-          <CupertinoButtonInfo3
-            onPress={() => { props.navigation.navigate("SignUp") }}
-            style={styles.cupertinoButtonInfo3}
-          ></CupertinoButtonInfo3>
+        <CupertinoButtonInfo3
+          onPress={() => { props.navigation.navigate("SignUp") }}
+          style={styles.cupertinoButtonInfo3}
+        ></CupertinoButtonInfo3>
         </ImageBackground>
         <Text style={styles.text}>Sign In</Text>
         <Text style={styles.loremIpsum}>Hi there! Nice to see you again.</Text>
@@ -68,7 +87,8 @@ function SignIn(props) {
           placeholderTextColor="rgba(155,155,155,1)"
           style={styles.textInput}
           value={form.username}
-          onChangeText={(txt) => { onChangeHandler(txt, "username") }}
+          onChangeText={(txt) => { onChangeHandler(txt, "username"), setTextInputUsername(txt) }} 
+          maxLength={15}
         ></TextInput>
         <TextInput
           placeholder=" Password"
@@ -76,8 +96,9 @@ function SignIn(props) {
           secureTextEntry={hidePass ? true : false}
           placeholderTextColor="rgba(155,155,155,1)"
           style={styles.textInput1}
+          maxLength={15}
           value={form.password}
-          onChangeText={(txt) => { onChangeHandler(txt, "password") }}
+          onChangeText={(txt) => { onChangeHandler(txt, "password"), setTextInputPassword(txt) }}
 
         ></TextInput>
         <Icon
@@ -86,7 +107,7 @@ function SignIn(props) {
           style={styles.icon} />
         <CupertinoButtonInfo
           onPress={() => {
-            onSubmitHandler();
+            checkTextInput();
           }}
           style={styles.cupertinoButtonInfo}
         ></CupertinoButtonInfo>

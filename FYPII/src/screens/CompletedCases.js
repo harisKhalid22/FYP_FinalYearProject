@@ -42,7 +42,7 @@ function CompletedCases(props) {
               <View style={styles.elightAVision1Column}>
                 <Text style={styles.elightAVision1}>Adopt an orphan</Text>
                 <Text style={styles.sponsorForA1}>Rs.5000 - Monthly support to an orphan</Text>
-                <View style={styles.rect1}> <ProgressBar progress={.3} width={245} color={'#0279fa'} borderColor={'#0279fa'} /> </View>
+                <View style={styles.rect1}> <ProgressBar progress={9} width={245} color={'#0279fa'} borderColor={'#0279fa'} /> </View>
                 <View style={styles.current1Row}>
                   <Text style={styles.current1}>Current</Text>
                   <Text style={styles.target1}>Target</Text>
@@ -77,7 +77,7 @@ function CompletedCases(props) {
             <View style={styles.elightAVision2Column}>
               <Text style={styles.elightAVision2}>Food for the hungry</Text>
               <Text style={styles.sponsorForA2}>Rs.5000 - food for all</Text>
-              <View style={styles.rect3}> <ProgressBar progress={.7} width={245} color={'#0279fa'} borderColor={'#0279fa'} /> </View>
+              <View style={styles.rect3}> <ProgressBar progress={9} width={245} color={'#0279fa'} borderColor={'#0279fa'} /> </View>
               <View style={styles.current2Row}>
                 <Text style={styles.current2}>Current</Text>
                 <Text style={styles.target2}>Target</Text>

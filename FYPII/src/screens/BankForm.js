@@ -29,7 +29,7 @@ function BankForm(props) {
     cnicNumber: ""
   });
 
-  const domain = "http://192.168.1.100:3000"
+  const domain = "http://192.168.1.104:3000"
 
   const onChangeHandler = (val, field) => {
     setForm({
@@ -75,6 +75,62 @@ function BankForm(props) {
     setVisible(false)
   };
 
+  const [textInputAmount, setTextInputAmount] = useState('');
+  const [textInputEmail, setTextInputEmail] = useState('');
+  const [textInputCard, setTextCard] = useState('');
+  const [textInputMonthYear, setTextMonthYear] = useState('');
+  const [textInputCvc, setTextCvc] = useState('');
+  const [textInputUsername, setTextUsername] = useState('');
+  const [textInputPhone, setTextPhone] = useState('');
+  const [textInputCnic, setTextCnic] = useState('');
+
+  const checkTextInput = () => {
+  
+    if (!textInputAmount.trim()) {
+      alert('Please Enter Amount in PKR');
+      return;
+    }
+
+    if (!textInputEmail.trim()) {
+      alert('Please Enter Email');
+      return;
+    }
+
+    if (!textInputCard.trim()) {
+      alert('Please Enter Card Number');
+      return;
+    }
+
+    if (!textInputMonthYear.trim()) {
+      alert('Please Enter Month and Year');
+      return;
+    }
+
+    // CVC = Card Verification Code = max 3 digits 
+    if (!textInputCvc.trim()) {
+      alert('Please Enter CVC');
+      return;
+    }
+
+    if (!textInputUsername.trim()) {
+      alert('Please Enter Name');
+      return;
+    }
+
+    if (!textInputPhone.trim()) {
+      alert('Please Enter Phone');
+      return;
+    }
+
+    if (!textInputCnic.trim()) {
+      alert('Please Enter CNIC');
+      return;
+    }
+
+    //Checked Successfully
+    bankForm();
+  };
+
   return (
     <View style={styles.container}>
       <StatusBar hidden />
@@ -94,63 +150,65 @@ function BankForm(props) {
           placeholderTextColor="rgba(155,155,155,1)"
           style={styles.name}
           value={form.name}
-          onChangeText={(txt) => {
-            onChangeHandler(txt, "name")
-          }}
+          onChangeText={(txt) => { onChangeHandler(txt, "name"), setTextUsername(txt) }} 
+          maxLength={25}
+
         ></TextInput>
         <TextInput
           placeholder=" CVC"
           placeholderTextColor="rgba(155,155,155,1)"
           style={styles.cvc}
           // value={form.CVC}
-          // onChangeText={(txt) => {
-          //   onChangeHandler(txt, "CVC")
-          // }}
+          // onChangeText={(txt) => { onChangeHandler(txt, "CVC"), setTextUsername(txt) }} 
+          onChangeText={(txt) => setTextCvc(txt) } 
+          maxLength={3}
+          
         ></TextInput>
         <TextInput
           placeholder=" Phone"
           placeholderTextColor="rgba(155,155,155,1)"
           style={styles.phone}
           value={form.phone}
-          onChangeText={(txt) => {
-            onChangeHandler(txt, "phone")
-          }}
+          onChangeText={(txt) => { onChangeHandler(txt, "phone"), setTextPhone(txt) }} 
+          maxLength={11}
+          
         ></TextInput>
         <TextInput
           placeholder=" CNIC"
           placeholderTextColor="rgba(155,155,155,1)"
           style={styles.cnic}
           value={form.cnicNumber}
-          onChangeText={(txt) => {
-            onChangeHandler(txt, "cnicNumber")
-          }}
+          onChangeText={(txt) => { onChangeHandler(txt, "cnicNumber"), setTextCnic(txt) }} 
+          maxLength={16}
+          
         ></TextInput>
         <TextInput
           placeholder=" MM / YY"
           placeholderTextColor="rgba(155,155,155,1)"
           style={styles.monthYear}
           // value={form.{{MM / YY"}}}
-          // onChangeText={(txt) => {
-          //   onChangeHandler(txt, "MM / YY")
-          // }}
+          // onChangeText={(txt) => { onChangeHandler(txt, "MM / YY"), setTextUsername(txt) }} 
+          onChangeText={(txt) => setTextMonthYear(txt) } 
+          maxLength={5}
+
         ></TextInput>
         <TextInput
           placeholder=" Card number"
           placeholderTextColor="rgba(155,155,155,1)"
           style={styles.cardNumber}
           value={form.cardNumber}
-          onChangeText={(txt) => {
-            onChangeHandler(txt, "cardNumber")
-          }}
+          onChangeText={(txt) => { onChangeHandler(txt, "cardNumber"), setTextCard(txt) }} 
+          maxLength={16}
+          
         ></TextInput>
         <TextInput
           placeholder=" Email"
           placeholderTextColor="rgba(155,155,155,1)"
           style={styles.email}
           value={form.email}
-          onChangeText={(txt) => {
-            onChangeHandler(txt, "email")
-          }}
+          onChangeText={(txt) => { onChangeHandler(txt, "email"), setTextInputEmail(txt) }} 
+          maxLength={25}
+          
         ></TextInput>
         <Text style={styles.bankTransfer}>Bank Transfer</Text>
         <Text style={styles.loremIpsum1}>Donate to Serve Humanity</Text>
@@ -159,13 +217,11 @@ function BankForm(props) {
           placeholderTextColor="rgba(155,155,155,1)"
           style={styles.amount}
           value={form.amountOfDonation}
-          onChangeText={(txt) => {
-            onChangeHandler(txt, "amountOfDonation")
-          }}
+          onChangeText={(txt) => { onChangeHandler(txt, "amountOfDonation"), setTextInputAmount(txt) }} 
         ></TextInput>
         <BankFormButton
           onPress={() => {
-            bankForm()
+            checkTextInput()
           }}
         style={styles.cupertinoButtonInfo9}>
         </BankFormButton>

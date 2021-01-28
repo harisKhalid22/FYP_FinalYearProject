@@ -25,7 +25,7 @@ import IndividualCase3 from './src/screens/IndividualCase3';
 import IndividualCase4 from './src/screens/IndividualCase4';
 
 const DrawerNavigation = createDrawerNavigator({
-  " ": IndividualCase,
+  " ": FrontPage,
   Home: Home,
   Donate: Donate,
   "Upload Case": UploadCase,

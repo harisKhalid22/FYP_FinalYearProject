@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import {
   StyleSheet,
   View,
@@ -11,6 +11,39 @@ import {
 import CupertinoButtonInfo5 from "../components/CupertinoButtonInfo5";
 
 function NewPassword(props) {
+
+  const [textInputOldPassword, setTextInputOldPassword] = useState('');
+  const [textInputNewPassword, setTextInputNewPassword] = useState('');
+  const [textInputReNewPassword, setTextInputReNewPassword] = useState('');
+
+  const checkTextInput = () => {
+  
+    if (!textInputOldPassword.trim()) {
+      alert('Please Enter Old Password');
+      return;
+    }
+
+    if (!textInputNewPassword.trim()) {
+      alert('Please Enter New Password');
+      return;
+    }
+
+    if (!textInputReNewPassword.trim()) {
+      alert('Please Enter Re Password');
+      return;
+    }
+
+    if (textInputNewPassword.trim() == textInputReNewPassword.trim()) {
+      //Checked Successfully
+      props.navigation.navigate("SignIn")
+      return;
+    }
+    else {
+      alert('New Password Is Not Same.');
+    }
+  };
+
+
   return (
     <View style={styles.container}>
       <StatusBar hidden />
@@ -27,7 +60,9 @@ function NewPassword(props) {
           imageStyle={styles.image2_imageStyle}
         >
         <CupertinoButtonInfo5
-          onPress={()=>{props.navigation.navigate("SignIn")}}
+          onPress={() => {
+            checkTextInput();
+          }}
           style={styles.cupertinoButtonInfo5}
         ></CupertinoButtonInfo5>
         </ImageBackground>
@@ -36,16 +71,25 @@ function NewPassword(props) {
           placeholder=" New Password"
           placeholderTextColor="rgba(155,155,155,1)"
           style={styles.placeholder2}
+          onChangeText={(txt) => setTextInputNewPassword(txt) } 
+          maxLength={15}
+
         ></TextInput>
         <TextInput
           placeholder=" Re Enter Password"
           placeholderTextColor="rgba(155,155,155,1)"
           style={styles.placeholder3}
+          onChangeText={(txt) => setTextInputReNewPassword(txt) } 
+          maxLength={15}
+
         ></TextInput>
         <TextInput
           placeholder=" Old Password"
           placeholderTextColor="rgba(155,155,155,1)"
           style={styles.placeholder1}
+          onChangeText={(txt) => setTextInputOldPassword(txt) } 
+          maxLength={15}
+
         ></TextInput>
       </View>
     </View>

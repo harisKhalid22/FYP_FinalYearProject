@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import {
   StyleSheet,
   View,
@@ -11,6 +11,19 @@ import {
 import CupertinoButtonInfo4 from "../components/CupertinoButtonInfo4";
 
 function ForgotPassword(props) {
+
+  const [textInputUsername, setTextInputUsername] = useState('');
+
+  const checkTextInput = () => {
+  
+    if (!textInputUsername.trim()) {
+      alert('Please Enter Username or Email');
+      return;
+    }
+    //Checked Successfully
+    props.navigation.navigate("NewPassword")
+  };
+
   return (
     <View style={styles.container}>
       <StatusBar hidden barStyle="dark-content" />
@@ -27,7 +40,9 @@ function ForgotPassword(props) {
           imageStyle={styles.image2_imageStyle}
         >
         <CupertinoButtonInfo4
-          onPress={()=>{props.navigation.navigate("NewPassword")}}
+          onPress={() => {
+            checkTextInput();
+          }}
           style={styles.cupertinoButtonInfo4}
         ></CupertinoButtonInfo4>
         </ImageBackground>
@@ -37,6 +52,8 @@ function ForgotPassword(props) {
           placeholder=" Username or Email"
           placeholderTextColor="rgba(155,155,155,1)"
           style={styles.placeholder}
+          onChangeText={(txt) => setTextInputUsername(txt) } 
+          maxLength={15}
         ></TextInput>
       </View>
     </View>

@@ -1,0 +1,90 @@
+<!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
+<div class="main-content">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="card">
+					<div class="card-header card-header-danger">
+						<h2 class="card-title">Cases List</h2>
+						<h3 class="card-category">LSH Admin</h3>
+					</div>
+					<div class="card-body">
+						<div class="table-responsive">
+							<table class="table">
+								<thead class="text-primary">
+									<th>ID</th>
+									<th>Name</th>
+									<th>CNIC</th>
+									<th>Phone Number</th>
+									<th>Amount</th>
+									<th>Details</th>
+								</thead>
+								<tbody>
+									<tr *ngFor="let items of cases; index as indexOfelement">
+										<td>
+											{{ indexOfelement + 1 }}
+										</td>
+										<td>
+											{{ items.name }}
+										</td>
+										<td>
+											{{ items.cnicNumber }}
+										</td>
+										<td>
+											{{ items.phone }}
+										</td>
+										<td class="text-primary">
+											{{ items.requiredAmount }}
+										</td>
+										<td>
+											<!-- <button>See Details</button> -->
+											{{ items.caseDescription }}
+										</td>
+										<td class="td-actions text-right">
+											<div *ngIf="items.isAccept">
+												<button
+													mat-raised-button
+													type="button"
+													matTooltip="Reject Task"
+													[matTooltipPosition]="'above'"
+													class="btn btn-danger"
+													(click)="onRejectCase(items._id, indexOfelement)"
+												>
+													Reject
+													<!-- <i class="material-icons">edit</i> -->
+												</button>
+											</div>
+											<div *ngIf="!items.isAccept">
+												<button
+													mat-raised-button
+													type="button"
+													matTooltip="Accept Task"
+													[matTooltipPosition]="'above'"
+													class="btn btn-success"
+													(click)="onAcceptCase(items._id, indexOfelement)"
+												>
+													Accept
+													<!-- <i class="material-icons">edit</i> -->
+												</button>
+											</div>
+											<button
+												mat-raised-button
+												type="button"
+												matTooltip="Remove"
+												[matTooltipPosition]="'above'"
+												class="btn btn-danger btn-link btn-sm btn-just-icon"
+												(click)="onDeleteCase(items._id)"
+											>
+												<i class="material-icons">delete</i>
+											</button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
